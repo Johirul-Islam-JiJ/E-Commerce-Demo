@@ -53,7 +53,20 @@
 
 </head>
 
-<body>
+<body class="g-sidenav-show  bg-gray-200">
+    @include('layouts.inc.sidebar')
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+        @include('layouts.inc.adminnav')
+
+        <div class="container-fluid py-4">
+            @yield('content')
+        </div>
+
+    </main>
+
+
     <!-- Scripts -->
     <script src="{{ asset('admin/js/popper.min.js') }}" defer></script>
     <script src="{{ asset('admin/js/bootstrap.min.js') }}" defer></script>
@@ -316,6 +329,8 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
+
+    @yield('scripts')
 </body>
 
 </html>

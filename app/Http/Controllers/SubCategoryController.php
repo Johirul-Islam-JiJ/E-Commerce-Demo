@@ -2,84 +2,86 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $sub_categories = SubCategory::with('category')
+            ->orderBy('created_at', 'DESC')
+            ->paginate();
+        return view('sub-categories.index', compact('sub_categories'));
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('sub-categories.form', compact('categories'));
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $valid = $request->validate([
+            'category_id' => ['required'],
+            'name' => ['required', 'string', 'max:255', 'min:3'],
+            'slug' => ['string', 'max:255'],
+            'description' => ['string'],
+            'status' => ['required', 'integer'],
+            'popular' => ['required', 'integer'],
+            'meta_title' => ['string', 'max:255'],
+            'meta_description' => ['string', 'max:255'],
+            'meta_keywords' => ['string', 'max:255'],
+        ]);
+
+        if (SubCategory::create($valid)) {
+            return redirect()->route('sub-categories.index');
+        }
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
     public function show(SubCategory $subCategory)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
     public function edit(SubCategory $subCategory)
     {
-        //
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('sub-categories.form', compact('subCategory', 'categories'));
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, SubCategory $subCategory)
     {
-        //
+        $valid = $request->validate([
+            'category_id' => ['required'],
+            'name' => ['required', 'string', 'max:255', 'min:3'],
+            'slug' => ['string', 'max:255'],
+            'description' => ['string'],
+            'status' => ['required', 'integer'],
+            'popular' => ['required', 'integer'],
+            'meta_title' => ['string', 'max:255'],
+            'meta_description' => ['string', 'max:255'],
+            'meta_keywords' => ['string', 'max:255'],
+        ]);
+
+        if ($subCategory->update($valid)) {
+            return redirect()->route('sub-categories.index');
+        }
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(SubCategory $subCategory)
     {
-        //
+        if ($subCategory->delete()) {
+            return redirect()->route('sub-categories.index');
+        }
+
     }
 }

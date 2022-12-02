@@ -52,7 +52,7 @@
                                                     Edit
                                                 </a>
 
-                                                <form action="{{ route('sub_category.destroy', $csub_category->id) }}"
+                                                <form action="{{ route('sub-categories.destroy', $sub_category->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')

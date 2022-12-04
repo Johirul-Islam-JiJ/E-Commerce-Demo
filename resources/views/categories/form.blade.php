@@ -68,14 +68,17 @@
                         @if (isset($category))
                             <div class="input-group input-group-outline mb-3">
                                 <label class="form-label" for="description">Description</label>
-                                <input type="text" class="form-control mb-3" id="description" name="description"
-                                    value="{{ $category->description }}">
+                                {{-- <input type="text" class="form-control mb-3" id="description" name="description"
+                                    value="{{ $category->description }}"> --}}
+                                <textarea name="description" id="description" cols="100"  rows="5"></textarea>
                             </div>
                         @else
                             <div class="input-group input-group-outline mb-3">
                                 <label class="form-label" for="description">Description</label>
-                                <input type="text" class="form-control mb-3" id="description" name="description"
-                                    value="{{ old('description') }}">
+                                {{-- <input type="text" class="form-control mb-3" id="description" name="description"
+                                    value="{{ old('description') }}"> --}}
+                                <textarea name="description" id="description" cols="100"  rows="5" value="{{ old('description') }}"></textarea>
+
                             </div>
                         @endif
 

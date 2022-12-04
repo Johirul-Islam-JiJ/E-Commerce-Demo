@@ -139,14 +139,18 @@
                         @if (isset($category))
                             <div class="input-group input-group-outline mb-3">
                                 <label class="form-label" for="meta_description">Meta Description</label>
-                                <input type="text" class="form-control mb-3" id="meta_description" name="meta_description"
-                                    value="{{ $category->meta_description }}">
+                                {{-- <input type="text" class="form-control mb-3" id="meta_description" name="meta_description"
+                                    value="{{ $category->meta_description }}"> --}}
+                                <textarea name="meta_description" id="meta_description" cols="100"  rows="5"></textarea>
+
                             </div>
                         @else
                             <div class="input-group input-group-outline mb-3">
                                 <label class="form-label" for="meta_description">Meta Description</label>
-                                <input type="text" class="form-control mb-3" id="meta_description" name="meta_description"
-                                    value="{{ old('meta_description') }}">
+                                {{-- <input type="text" class="form-control mb-3" id="meta_description" name="meta_description"
+                                    value="{{ old('meta_description') }}"> --}}
+                                <textarea name="meta_description" id="meta_description" cols="100"  rows="5" value="{{ old('meta_description') }}"></textarea>
+
                             </div>
                         @endif
 

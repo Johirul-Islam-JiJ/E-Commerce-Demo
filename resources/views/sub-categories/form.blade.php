@@ -97,9 +97,11 @@
                         @else
                             <div class="input-group input-group-outline mb-3">
                                 <label class="form-label" for="description">Description</label>
-                                <input type="text" class="form-control mb-3" id="description" name="description"
+                                <textarea type="text" class="form-control mb-3" cols="30" rows="5" id="description" name="description"
                                     value="{{ old('description') }}">
-                            </div>
+                                </textarea>
+
+                                </div>
                         @endif
 
                         <div class="row">
